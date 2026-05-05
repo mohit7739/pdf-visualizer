@@ -1,0 +1,312 @@
+@import "tailwindcss";
+
+/* ─── Anthropic-inspired Light Theme Tokens ────────────────────────────── */
+@theme {
+  --color-primary: #c96442;
+  --color-primary-dark: #b05535;
+  --color-primary-light: #d4845f;
+  --color-accent: #c96442;
+  --color-surface: #ffffff;
+  --color-surface-warm: #faf9f7;
+  --color-surface-elevated: #ffffff;
+  --color-surface-card: #ffffff;
+  --color-textbook: #fdfcfa;
+  --color-textbook-border: #e8e4dd;
+  --color-text-primary: #1a1a1a;
+  --color-text-secondary: #4a4a4a;
+  --color-text-muted: #8b8b8b;
+  --color-success: #2e7d52;
+  --color-error: #c53030;
+  --color-border: #e8e5e0;
+  --color-border-light: #f0ede8;
+}
+
+/* ─── Base Styles ──────────────────────────────────────────────────────── */
+@layer base {
+  * {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+  }
+
+  html {
+    scroll-behavior: smooth;
+  }
+
+  body {
+    font-family: 'Inter', 'Segoe UI', -apple-system, BlinkMacSystemFont, sans-serif;
+    background-color: var(--color-surface-warm);
+    color: var(--color-text-primary);
+    line-height: 1.6;
+    min-height: 100vh;
+    overflow-x: hidden;
+    -webkit-font-smoothing: antialiased;
+    -moz-osx-font-smoothing: grayscale;
+  }
+
+  ::-webkit-scrollbar {
+    width: 6px;
+  }
+  ::-webkit-scrollbar-track {
+    background: transparent;
+  }
+  ::-webkit-scrollbar-thumb {
+    background: rgba(0, 0, 0, 0.12);
+    border-radius: 3px;
+  }
+  ::-webkit-scrollbar-thumb:hover {
+    background: rgba(0, 0, 0, 0.2);
+  }
+}
+
+/* ─── Animations ───────────────────────────────────────────────────────── */
+@keyframes float {
+  0%, 100% { transform: translateY(0px); }
+  50% { transform: translateY(-8px); }
+}
+
+@keyframes pulse-glow {
+  0%, 100% { box-shadow: 0 0 15px rgba(201, 100, 66, 0.1); }
+  50% { box-shadow: 0 0 30px rgba(201, 100, 66, 0.2); }
+}
+
+@keyframes slide-up {
+  from {
+    opacity: 0;
+    transform: translateY(24px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes shimmer {
+  0% { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes fade-in {
+  from { opacity: 0; }
+  to { opacity: 1; }
+}
+
+@keyframes spin-slow {
+  from { transform: rotate(0deg); }
+  to { transform: rotate(360deg); }
+}
+
+.animate-float {
+  animation: float 6s ease-in-out infinite;
+}
+
+.animate-pulse-glow {
+  animation: pulse-glow 3s ease-in-out infinite;
+}
+
+.animate-slide-up {
+  animation: slide-up 0.5s ease-out forwards;
+}
+
+.animate-shimmer {
+  background: linear-gradient(
+    90deg,
+    rgba(201, 100, 66, 0.04) 0%,
+    rgba(201, 100, 66, 0.1) 50%,
+    rgba(201, 100, 66, 0.04) 100%
+  );
+  background-size: 200% 100%;
+  animation: shimmer 2s linear infinite;
+}
+
+.animate-fade-in {
+  animation: fade-in 0.4s ease-out forwards;
+}
+
+.animate-spin-slow {
+  animation: spin-slow 2s linear infinite;
+}
+
+/* ─── Clean Card ───────────────────────────────────────────────────────── */
+.clean-card {
+  background: var(--color-surface-card);
+  border: 1px solid var(--color-border);
+  border-radius: 12px;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.04);
+  transition: box-shadow 0.2s ease;
+}
+
+.clean-card:hover {
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.06);
+}
+
+/* ─── Textbook styling ─────────────────────────────────────────────────── */
+.textbook-page {
+  background-color: var(--color-textbook);
+  background-image:
+    linear-gradient(rgba(0, 0, 0, 0.015) 1px, transparent 1px);
+  background-size: 100% 28px;
+  border: 1px solid var(--color-textbook-border);
+  border-radius: 8px;
+  box-shadow:
+    inset 0 0 40px rgba(0, 0, 0, 0.01),
+    0 2px 8px rgba(0, 0, 0, 0.04);
+  position: relative;
+}
+
+.textbook-page::before {
+  content: '';
+  position: absolute;
+  left: 0;
+  top: 0;
+  bottom: 0;
+  width: 3px;
+  background: linear-gradient(
+    to bottom,
+    var(--color-textbook-border),
+    rgba(200, 180, 150, 0.2),
+    var(--color-textbook-border)
+  );
+  border-radius: 8px 0 0 8px;
+}
+
+/* ─── Mermaid container (all diagram types) ────────────────────────────── */
+.mermaid-container svg {
+  max-width: 100%;
+  height: auto;
+}
+
+/* Flowchart nodes */
+.mermaid-container .node rect,
+.mermaid-container .node polygon,
+.mermaid-container .node circle {
+  fill: #faf5f2 !important;
+  stroke: var(--color-primary) !important;
+  stroke-width: 1.5px !important;
+  rx: 8px !important;
+}
+
+.mermaid-container .nodeLabel {
+  color: #1a1a1a !important;
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 500 !important;
+}
+
+.mermaid-container .edgePath path {
+  stroke: var(--color-primary-light) !important;
+  stroke-width: 1.5px !important;
+}
+
+.mermaid-container marker path {
+  fill: var(--color-primary-light) !important;
+}
+
+.mermaid-container .edgeLabel {
+  background-color: #ffffff !important;
+  color: var(--color-text-muted) !important;
+}
+
+/* Mindmap */
+.mermaid-container .mindmap-node rect,
+.mermaid-container .mindmap-node circle,
+.mermaid-container .mindmap-node polygon {
+  stroke-width: 1.5px !important;
+}
+
+.mermaid-container .mindmap-node .nodeLabel {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+}
+
+/* Pie chart */
+.mermaid-container .pieCircle {
+  stroke: #ffffff !important;
+  stroke-width: 2px !important;
+}
+
+.mermaid-container .pieTitleText {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 15px !important;
+  font-weight: 600 !important;
+  fill: #1a1a1a !important;
+}
+
+.mermaid-container .pieLabel {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+}
+
+.mermaid-container .legend text {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  fill: #4a4a4a !important;
+}
+
+/* Sequence diagram */
+.mermaid-container .actor {
+  fill: #faf5f2 !important;
+  stroke: var(--color-primary) !important;
+  stroke-width: 1.5px !important;
+}
+
+.mermaid-container .actor-line {
+  stroke: var(--color-border) !important;
+}
+
+.mermaid-container text.actor > tspan {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 13px !important;
+  font-weight: 600 !important;
+  fill: #1a1a1a !important;
+}
+
+.mermaid-container .messageLine0,
+.mermaid-container .messageLine1 {
+  stroke: var(--color-primary-light) !important;
+  stroke-width: 1.5px !important;
+}
+
+.mermaid-container .messageText {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+  fill: #4a4a4a !important;
+}
+
+/* Timeline */
+.mermaid-container .timeline-title {
+  font-family: 'Inter', sans-serif !important;
+  font-weight: 600 !important;
+}
+
+.mermaid-container .timeline-text {
+  font-family: 'Inter', sans-serif !important;
+  font-size: 12px !important;
+}
+
+/* ─── Drop zone styling ───────────────────────────────────────────────── */
+.dropzone {
+  border: 1.5px dashed var(--color-border);
+  transition: all 0.25s ease;
+  cursor: pointer;
+}
+
+.dropzone:hover,
+.dropzone-active {
+  border-color: var(--color-primary);
+  background: rgba(201, 100, 66, 0.02);
+}
+
+/* ─── Progress bar ─────────────────────────────────────────────────────── */
+.progress-bar {
+  height: 3px;
+  background: linear-gradient(
+    90deg,
+    var(--color-primary),
+    var(--color-primary-light),
+    var(--color-primary)
+  );
+  background-size: 200% 100%;
+  animation: shimmer 1.5s linear infinite;
+  border-radius: 2px;
+}
